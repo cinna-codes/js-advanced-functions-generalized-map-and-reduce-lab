@@ -6,10 +6,19 @@ function map(sourceArray, fn) {
     return newArr
 }
 
-function reduce(sourceArray, fn, startingPoint=0) { 
-    let val = startingPoint
-    for (const int of sourceArray) {
-        val = fn(int)
+function reduce(sourceArray, fn, startingPoint) { 
+    let total
+    if (startingPoint) {
+        total = startingPoint
+        for (let i = 0; i < sourceArray.length; i++) {
+            total = fn(sourceArray[i], total)
+        }
+        return total
+    } else {
+        total = sourceArray[0]
+        for (let i = 1; i < sourceArray.length; i++) {
+            total = fn(sourceArray[i], total)
+        }
+        return total
     }
-    return val
 }
